@@ -363,7 +363,7 @@ function TwitchEmbed() {
         }}
       >
         <Twitch size={20} className={isOpen ? "" : "animate-pulse"} />
-        <span>{isOpen ? 'Закрыть трансляцию' : 'Смотреть прямой эфир'}</span>
+        <span>{isOpen ? 'Закрыть трансляцию' : 'Смотреть прямой эфир1'}</span>
       </button>
 
       {isOpen && (
