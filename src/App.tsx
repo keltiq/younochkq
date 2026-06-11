@@ -237,7 +237,7 @@ function ScrollTop() {
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
-function Hero() {
+function Hero({ isLive }: { isLive: boolean }) {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-24 overflow-hidden">
       {/* Ambient glows */}
@@ -259,9 +259,7 @@ function Hero() {
           ? 'border-[#e8739a]/30 bg-[#e8739a]/10' 
           : 'border-[#252538] bg-[#101018]/50'
       }`}>
-        {/* Точка мигает только если isLive === true */}
         <span className={`w-2 h-2 rounded-full ${isLive ? 'bg-[#e84455] live-dot' : 'bg-gray-600'}`} />
-        
         <span className={`text-xs font-bold tracking-widest uppercase ${isLive ? 'text-[#f4a0bc]' : 'text-[#9090b0]'}`}>
           {isLive ? 'В ЭФИРЕ · LIVE' : 'VTuber · Streamer'}
         </span>
@@ -274,7 +272,6 @@ function Hero() {
             <img src="/image.png" alt="younochkq" className="w-full h-full object-cover object-top" />
           </div>
         </div>
-        {/* Orbiting sparkles */}
         <span className="absolute -top-1 -right-1 text-[#f9d56e] text-lg float-anim">✦</span>
         <span className="absolute -bottom-1 -left-2 text-[#e8739a] text-sm float-anim" style={{ animationDelay: '.7s' }}>♡</span>
         <span className="absolute top-1/2 -right-5 text-[#f4a0bc] text-xs float-anim" style={{ animationDelay: '1.2s' }}>★</span>
@@ -288,8 +285,7 @@ function Hero() {
         <p className="text-[#9090b0] text-sm font-bold tracking-[.3em] uppercase mt-1">юно · yuno</p>
       </div>
 
-
-      {/* Tags */}
+      {/* Остальная часть блока Hero... (Tags, CTAs, Scroll hint) */}
       <div className="fade-up flex flex-wrap justify-center gap-2 mt-5" style={{ animationDelay: '.3s' }}>
         {['стриминг', 'VTuber', 'игры', 'cozy vibes'].map((t) => (
           <span key={t} className="px-3 py-1 rounded-full text-xs font-bold text-[#e8739a] border border-[#e8739a]/30 bg-[#e8739a]/10">
@@ -298,27 +294,16 @@ function Hero() {
         ))}
       </div>
 
-      {/* CTAs */}
       <div className="fade-up flex flex-col sm:flex-row gap-3 mt-7" style={{ animationDelay: '.4s' }}>
-        <a
-          href="https://www.twitch.tv/younochkq"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-white text-sm transition-all hover:scale-105 hover:shadow-lg"
-          style={{ background: 'linear-gradient(135deg,#e8739a,#c45880)', boxShadow: '0 4px 18px rgba(232,115,154,.4)' }}
-        >
+        <a href="https://www.twitch.tv/younochkq" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-white text-sm transition-all hover:scale-105 hover:shadow-lg" style={{ background: 'linear-gradient(135deg,#e8739a,#c45880)', boxShadow: '0 4px 18px rgba(232,115,154,.4)' }}>
           <Twitch size={17} />
           Смотреть на Twitch
         </a>
-        <a
-          href="#about"
-          className="flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-[#9090b0] text-sm border border-[#252538] hover:border-[#e8739a] hover:text-[#e8739a] transition-all"
-        >
+        <a href="#about" className="flex items-center justify-center gap-2 px-6 py-3 rounded-full font-bold text-[#9090b0] text-sm border border-[#252538] hover:border-[#e8739a] hover:text-[#e8739a] transition-all">
           Узнать больше
         </a>
       </div>
 
-      {/* Scroll hint */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[#252538]">
         <div className="w-px h-8 bg-gradient-to-b from-[#e8739a]/50 to-transparent" />
         <span className="scroll-dot w-1.5 h-1.5 rounded-full bg-[#e8739a]/40 block" />
@@ -326,7 +311,6 @@ function Hero() {
     </section>
   );
 }
-
 // ─── Stream ────────────────────────────────────────────────────────────────────
 
 function TwitchEmbed() {
@@ -389,7 +373,7 @@ function TwitchEmbed() {
         }}
       >
         <Twitch size={20} className={isOpen ? "" : "animate-pulse"} />
-        <span>{isOpen ? 'Закрыть трансляцию' : 'Смотреть прямой эфир'}</span>
+        <span>{isOpen ? 'Закрыть трансляцию' : 'Смотреть прямой эфирхххх'}</span>
       </button>
 
       {isOpen && (
