@@ -324,27 +324,26 @@ function Hero() {
 function TwitchEmbed() {
   const [isOpen, setIsOpen] = useState(false);
   const playerRef = useRef<HTMLDivElement>(null);
+  const embedInstance = useRef<any>(null);
 
   useEffect(() => {
-    if (isOpen && !window.Twitch) {
-      const script = document.createElement('script');
-      script.src = 'https://twitch.tv';
-      script.async = true;
-      script.onload = () => initTwitch();
-      document.body.appendChild(script);
-    } else if (isOpen && window.Twitch) {
-      setTimeout(initTwitch, 100);
-    }
-  }, [isOpen]);
+    // Если компонент размонтирован или закрыт, очищаем инстанс
+    return () => {
+      embedInstance.current = null;
+    };
+  }, []);
 
   const initTwitch = () => {
+    // Проверка, что контейнер готов и API доступно
     if (playerRef.current && window.Twitch) {
+      // Очистка перед созданием нового инстанса
       playerRef.current.innerHTML = '';
-      new window.Twitch.Embed(playerRef.current, {
+      
+      embedInstance.current = new window.Twitch.Embed(playerRef.current, {
         width: '100%',
         height: '100%',
-        channel: 'hyver', //hyver younochkq
-        parent: [window.location.hostname], 
+        channel: 'hyver',
+        parent: [window.location.hostname],
         autoplay: true,
         muted: true,
         layout: 'video',
@@ -352,10 +351,29 @@ function TwitchEmbed() {
     }
   };
 
+  const handleToggle = () => {
+    if (isOpen) {
+      setIsOpen(false);
+    } else {
+      setIsOpen(true);
+      // Если скрипт уже загружен, инициализируем сразу
+      if (window.Twitch) {
+        setTimeout(initTwitch, 0);
+      } else {
+        // Если скрипт еще не загружен — загружаем его
+        const script = document.createElement('script');
+        script.src = 'https://player.twitch.tv/js/embed/v1.js';
+        script.async = true;
+        script.onload = initTwitch;
+        document.body.appendChild(script);
+      }
+    }
+  };
+
   return (
     <section className="py-10 px-4 max-w-4xl mx-auto text-center relative z-10">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleToggle}
         className="inline-flex items-center gap-3 px-6 py-3.5 rounded-2xl font-bold text-white transition-all duration-300 hover:scale-105"
         style={{
           background: 'linear-gradient(135deg, #9146FF, #6441A5)',
@@ -363,15 +381,13 @@ function TwitchEmbed() {
         }}
       >
         <Twitch size={20} className={isOpen ? "" : "animate-pulse"} />
-        <span>{isOpen ? 'Закрыть трансляцию' : 'Смотреть прямой эфир2'}</span>
+        <span>{isOpen ? 'Закрыть трансляцию' : 'Смотреть прямой эфир3'}</span>
       </button>
 
       {isOpen && (
-        <div 
-          ref={playerRef}
-          className="mt-6 aspect-video w-full rounded-2xl overflow-hidden shadow-2xl border border-[#9146FF]/20 bg-black"
-          style={{ height: '450px' }}
-        />
+        <div className="mt-6 w-full rounded-2xl overflow-hidden shadow-2xl border border-[#9146FF]/20 bg-black" style={{ height: '450px' }}>
+          <div ref={playerRef} className="w-full h-full" />
+        </div>
       )}
     </section>
   );
