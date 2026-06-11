@@ -255,7 +255,7 @@ function Hero() {
       {/* Badge */}
       <div className="fade-up flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#e8739a]/30 bg-[#e8739a]/10 mb-8">
         <span className="w-2 h-2 rounded-full bg-[#e84455] live-dot" />
-        <span className="text-[#f4a0bc] text-xs font-bold tracking-widest uppercase">VTuber · Стримерша</span>
+        <span className="text-[#f4a0bc] text-xs font-bold tracking-widest uppercase">VTuber · Streamer</span>
       </div>
 
       {/* Avatar */}
@@ -432,7 +432,7 @@ interface IDonate {
 }
 
 const DONATES: IDonate[] = [
-  { label: 'DonationAlerts', desc: 'Поддержать стримершу', url: 'https://www.donationalerts.com/r/younochkq', icon: <IconDonation size={24} />, badge: '♡' },
+  { label: 'DonationAlerts', desc: 'Поддержать стримера', url: 'https://www.donationalerts.com/r/younochkq', icon: <IconDonation size={24} />, badge: '♡' },
   { label: 'Donatex',        desc: 'Донат через Donatex',  url: 'https://donatex.gg/donate/younochkq',        icon: <Heart size={24} />,         badge: '★' },
   { label: 'DonatePay',      desc: 'Донат через DonatePay',url: 'https://new.donatepay.ru/@1365717',           icon: <Heart size={24} />,         badge: '✦' },
 ];
@@ -441,7 +441,7 @@ function Donate() {
   return (
     <section id="donate" className="py-20 px-4">
       <div className="max-w-3xl mx-auto">
-        <SectionTitle>Поддержать стримершу</SectionTitle>
+        <SectionTitle>Поддержать стримера</SectionTitle>
         <p className="text-center text-[#9090b0] text-sm mb-10 -mt-4">Ваша поддержка вдохновляет и мотивирует ♡</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
