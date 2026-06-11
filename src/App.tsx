@@ -318,6 +318,44 @@ function Hero() {
   );
 }
 
+// ─── Stream ────────────────────────────────────────────────────────────────────
+import { useState } from 'react';
+import { Twitch, ChevronDown, ChevronUp } from 'lucide-react';
+
+function TwitchEmbed() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <section className="py-10 px-4 max-w-4xl mx-auto text-center relative z-10">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="inline-flex items-center gap-3 px-6 py-3.5 rounded-2xl font-bold text-white transition-all duration-300 hover:scale-105"
+        style={{
+          background: 'linear-gradient(135deg, #9146FF, #6441A5)',
+          boxShadow: '0 0 20px rgba(145, 70, 255, 0.3)'
+        }}
+      >
+        <Twitch size={20} className="animate-pulse" />
+        <span>{isOpen ? 'Скрыть трансляцию' : 'Открыть Твич Стрим (Прямой эфир)'}</span>
+        {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+      </button>
+
+      {isOpen && (
+        <div className="mt-6 aspect-video w-full rounded-2xl overflow-hidden shadow-2xl border border-[#9146FF]/20 bg-black">
+          <iframe
+            src="https://twitch.tv"
+            className="w-full h-full"
+            allowFullScreen
+            scrolling="no"
+          />
+        </div>
+      )}
+    </section>
+  );
+}
+
+
+
 // ─── About ────────────────────────────────────────────────────────────────────
 
 function About() {
