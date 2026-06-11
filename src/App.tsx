@@ -320,14 +320,37 @@ function Hero() {
 }
 
 // ─── Stream ────────────────────────────────────────────────────────────────────
-import { useState } from 'react';
-import { Twitch, ChevronDown, ChevronUp } from 'lucide-react';
 
 function TwitchEmbed() {
   const [isOpen, setIsOpen] = useState(false);
-  
-  // Указываем оба варианта домена Vercel для 100% совместимости
-  const embedUrl = "https://twitch.tv";
+  const playerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isOpen && !window.Twitch) {
+      const script = document.createElement('script');
+      script.src = 'https://twitch.tv';
+      script.async = true;
+      script.onload = () => initTwitch();
+      document.body.appendChild(script);
+    } else if (isOpen && window.Twitch) {
+      setTimeout(initTwitch, 100);
+    }
+  }, [isOpen]);
+
+  const initTwitch = () => {
+    if (playerRef.current && window.Twitch) {
+      playerRef.current.innerHTML = '';
+      new window.Twitch.Embed(playerRef.current, {
+        width: '100%',
+        height: '100%',
+        channel: 'younochkq',
+        parent: [window.location.hostname], 
+        autoplay: true,
+        muted: false,
+        layout: 'video',
+      });
+    }
+  };
 
   return (
     <section className="py-10 px-4 max-w-4xl mx-auto text-center relative z-10">
@@ -344,18 +367,16 @@ function TwitchEmbed() {
       </button>
 
       {isOpen && (
-        <div className="mt-6 aspect-video w-full rounded-2xl overflow-hidden shadow-2xl border border-[#9146FF]/20 bg-black">
-          <iframe
-            src={embedUrl}
-            className="w-full h-full"
-            allowFullScreen
-            scrolling="no"
-          />
-        </div>
+        <div 
+          ref={playerRef}
+          className="mt-6 aspect-video w-full rounded-2xl overflow-hidden shadow-2xl border border-[#9146FF]/20 bg-black"
+          style={{ height: 'auto', minHeight: '300px' }}
+        />
       )}
     </section>
   );
 }
+
 
 
 
