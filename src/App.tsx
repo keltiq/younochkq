@@ -342,7 +342,7 @@ function TwitchEmbed() {
       embedInstance.current = new window.Twitch.Embed(playerRef.current, {
         width: '100%',
         height: '100%',
-        channel: 'hyver',
+        channel: 'codemiko',
         parent: [window.location.hostname],
         autoplay: true,
         muted: true,
@@ -381,7 +381,7 @@ function TwitchEmbed() {
         }}
       >
         <Twitch size={20} className={isOpen ? "" : "animate-pulse"} />
-        <span>{isOpen ? 'Закрыть трансляцию' : 'Смотреть прямой эфир3'}</span>
+        <span>{isOpen ? 'Закрыть трансляцию' : 'Смотреть прямой эфир4'}</span>
       </button>
 
       {isOpen && (
