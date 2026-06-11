@@ -254,9 +254,17 @@ function Hero() {
       <span className="absolute bottom-16 right-[8%] text-[#f9d56e]/20 text-4xl float-anim select-none" style={{ animationDelay: '0.8s' }}>◇</span>
 
       {/* Badge */}
-      <div className="fade-up flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#e8739a]/30 bg-[#e8739a]/10 mb-8">
-        <span className="w-2 h-2 rounded-full bg-[#e84455] live-dot" />
-        <span className="text-[#f4a0bc] text-xs font-bold tracking-widest uppercase">VTuber · Streamer</span>
+      <div className={`fade-up flex items-center gap-2 px-4 py-1.5 rounded-full border transition-colors duration-500 mb-8 ${
+        isLive 
+          ? 'border-[#e8739a]/30 bg-[#e8739a]/10' 
+          : 'border-[#252538] bg-[#101018]/50'
+      }`}>
+        {/* Точка мигает только если isLive === true */}
+        <span className={`w-2 h-2 rounded-full ${isLive ? 'bg-[#e84455] live-dot' : 'bg-gray-600'}`} />
+        
+        <span className={`text-xs font-bold tracking-widest uppercase ${isLive ? 'text-[#f4a0bc]' : 'text-[#9090b0]'}`}>
+          {isLive ? 'В ЭФИРЕ · LIVE' : 'VTuber · Streamer'}
+        </span>
       </div>
 
       {/* Avatar */}
@@ -635,13 +643,35 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 // ─── App ──────────────────────────────────────────────────────────────────────
 
 export default function App() {
+  const [isLive, setIsLive] = useState(false);
+
+  useEffect(() => {
+    const checkLiveStatus = async () => {
+      try {
+        // Используем DecAPI для проверки, так как он проще и надежнее для публичных запросов
+        const response = await fetch(`https://decapi.me/twitch/uptime/younochkq`);
+        const text = await response.text();
+        // Если стример онлайн, API вернет время стрима (например, "02:15:30"), 
+        // если офлайн — строку "younochkq is offline"
+        setIsLive(!text.includes('offline'));
+      } catch (err) {
+        console.error("Не удалось проверить статус:", err);
+      }
+    };
+
+    checkLiveStatus();
+    const interval = setInterval(checkLiveStatus, 180000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#070710] text-[#f0f0ff] relative">
       <StarField />
       <main className="relative z-10">
-        <Hero />
+        {/* Передаем статус в Hero */}
+        <Hero isLive={isLive} />
         <About />
-        <TwitchEmbed /> {/* Мы добавили кнопку стрима сразу после блока "Обо мне" */}
+        <TwitchEmbed />
         <Socials />
         <Donate />
         <Footer />
