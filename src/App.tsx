@@ -342,7 +342,7 @@ function TwitchEmbed() {
       embedInstance.current = new window.Twitch.Embed(playerRef.current, {
         width: '100%',
         height: '100%',
-        channel: 'codemiko',
+        channel: 'younochkq',
         parent: [window.location.hostname],
         autoplay: true,
         muted: false,
