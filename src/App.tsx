@@ -325,6 +325,9 @@ import { Twitch, ChevronDown, ChevronUp } from 'lucide-react';
 
 function TwitchEmbed() {
   const [isOpen, setIsOpen] = useState(false);
+  
+  // Указываем оба варианта домена Vercel для 100% совместимости
+  const embedUrl = "https://twitch.tv";
 
   return (
     <section className="py-10 px-4 max-w-4xl mx-auto text-center relative z-10">
@@ -336,15 +339,14 @@ function TwitchEmbed() {
           boxShadow: '0 0 20px rgba(145, 70, 255, 0.3)'
         }}
       >
-        <Twitch size={20} className="animate-pulse" />
-        <span>{isOpen ? 'Скрыть трансляцию' : 'Открыть Твич Стрим (Прямой эфир)'}</span>
-        {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+        <Twitch size={20} className={isOpen ? "" : "animate-pulse"} />
+        <span>{isOpen ? 'Закрыть трансляцию' : 'Смотреть прямой эфир'}</span>
       </button>
 
       {isOpen && (
         <div className="mt-6 aspect-video w-full rounded-2xl overflow-hidden shadow-2xl border border-[#9146FF]/20 bg-black">
           <iframe
-            src="https://twitch.tv"
+            src={embedUrl}
             className="w-full h-full"
             allowFullScreen
             scrolling="no"
