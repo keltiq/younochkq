@@ -346,7 +346,7 @@ function TwitchEmbed() {
         channel: 'hyver', //hyver younochkq
         parent: [window.location.hostname], 
         autoplay: true,
-        muted: false,
+        muted: true,
         layout: 'video',
       });
     }
@@ -370,7 +370,7 @@ function TwitchEmbed() {
         <div 
           ref={playerRef}
           className="mt-6 aspect-video w-full rounded-2xl overflow-hidden shadow-2xl border border-[#9146FF]/20 bg-black"
-          style={{ height: 'auto', minHeight: '300px' }}
+          style={{ height: '450px' }}
         />
       )}
     </section>
