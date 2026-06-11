@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { Play, Pause, Volume2, VolumeX, Music, Heart, ExternalLink, Twitch, Youtube, Send, ChevronUp } from 'lucide-react';
 
+
 // ─── Platform SVG icons ──────────────────────────────────────────────────────
 
 function IconTikTok({ size = 20 }: { size?: number }) {
@@ -601,6 +602,7 @@ export default function App() {
       <main className="relative z-10">
         <Hero />
         <About />
+        <TwitchEmbed /> {/* Мы добавили кнопку стрима сразу после блока "Обо мне" */}
         <Socials />
         <Donate />
         <Footer />
@@ -610,3 +612,4 @@ export default function App() {
     </div>
   );
 }
+
