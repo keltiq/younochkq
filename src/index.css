@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: #070710;
+    color: #f0f0ff;
+    font-family: 'Nunito', sans-serif;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: #101020; }
+  ::-webkit-scrollbar-thumb { background: #e8739a; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #f4a0bc; }
+}
+
+/* ---- Floating particles ---- */
+.star {
+  position: fixed;
+  border-radius: 50%;
+  background: #fff;
+  pointer-events: none;
+  animation: twinkle var(--dur, 3s) ease-in-out var(--del, 0s) infinite;
+}
+@keyframes twinkle {
+  0%,100% { opacity: .1; transform: scale(.7); }
+  50%      { opacity: 1;  transform: scale(1.3); }
+}
+
+.petal {
+  position: fixed;
+  top: -24px;
+  border-radius: 50% 0 50% 0;
+  opacity: 0;
+  pointer-events: none;
+  animation: petalFall var(--dur, 14s) linear var(--del, 0s) infinite;
+}
+@keyframes petalFall {
+  0%   { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
+  8%   { opacity: .9; }
+  92%  { opacity: .5; }
+  100% { transform: translateY(110vh) translateX(70px) rotate(560deg); opacity: 0; }
+}
+
+/* ---- Gradient text ---- */
+.gt-gold-pink {
+  background: linear-gradient(135deg, #f9d56e 0%, #e8739a 55%, #f4a0bc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gt-pink {
+  background: linear-gradient(135deg, #f4a0bc 0%, #e8739a 60%, #c45880 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ---- Glass card ---- */
+.glass {
+  background: rgba(16,16,32,.82);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(232,115,154,.14);
+  border-radius: 18px;
+  transition: border-color .3s, box-shadow .3s;
+}
+.glass:hover {
+  border-color: rgba(232,115,154,.35);
+  box-shadow: 0 0 28px rgba(232,115,154,.12);
+}
+
+/* ---- Social card ---- */
+.s-card {
+  transition: transform .28s cubic-bezier(.34,1.56,.64,1), box-shadow .28s;
+}
+.s-card:hover { transform: translateY(-5px) scale(1.03); }
+
+/* ---- Donate card ---- */
+.d-card {
+  transition: transform .28s cubic-bezier(.34,1.56,.64,1), box-shadow .28s;
+}
+.d-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(249,213,110,.15);
+}
+
+/* ---- Hero avatar ring ---- */
+.avatar-ring {
+  position: relative;
+  display: inline-block;
+}
+.avatar-ring::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: conic-gradient(#e8739a, #f9d56e, #f4a0bc, #e84455, #e8739a);
+  animation: spin 6s linear infinite;
+  z-index: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---- Equalizer bars ---- */
+.eq-bar {
+  display: inline-block;
+  width: 3px;
+  background: #e8739a;
+  border-radius: 2px;
+  height: 3px;
+  animation: bar var(--sp, .7s) ease-in-out var(--d, 0s) infinite alternate;
+}
+@keyframes bar {
+  from { height: 3px; }
+  to   { height: var(--bar-h, 16px); }
+}
+
+/* ---- Scroll indicator ---- */
+.scroll-dot {
+  animation: scrollBounce 1.8s ease-in-out infinite;
+}
+@keyframes scrollBounce {
+  0%,100% { transform: translateY(0); opacity: .5; }
+  50%      { transform: translateY(6px); opacity: 1; }
+}
+
+/* ---- Range input ---- */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(232,115,154,.25);
+  outline: none;
+  cursor: pointer;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e8739a;
+  cursor: pointer;
+}
+
+/* ---- Dot grid bg ---- */
+.dot-grid {
+  background-image: radial-gradient(circle, rgba(232,115,154,.07) 1px, transparent 1px);
+  background-size: 38px 38px;
+}
+
+/* ---- Fade-up utility ---- */
+.fade-up {
+  opacity: 0;
+  animation: fadeUp .7s ease-out both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Live blink ---- */
+.live-dot {
+  animation: liveBlink 1.4s ease-in-out infinite;
+}
+@keyframes liveBlink {
+  0%,100% { opacity: 1; }
+  50%      { opacity: .25; }
+}
+
+/* ---- Float utility ---- */
+.float-anim {
+  animation: floatAnim 6s ease-in-out infinite;
+}
+@keyframes floatAnim {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-12px); }
+}
