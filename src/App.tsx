@@ -345,7 +345,7 @@ function TwitchEmbed() {
         channel: 'codemiko',
         parent: [window.location.hostname],
         autoplay: true,
-        muted: true,
+        muted: false,
         layout: 'video',
       });
     }
