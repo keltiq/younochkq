@@ -272,12 +272,13 @@ function Hero() {
       </div>
 
       {/* Name */}
-      <div className="fade-up text-center" style={{ animationDelay: '.2s' }}>
-        <h1 className="gt-gold-pink font-display font-bold text-5xl md:text-7xl tracking-tight leading-none mb-2">
+      <div className="fade-up text-center relative z-10" style={{ animationDelay: '.2s' }}>
+        <h1 className="gt-gold-pink font-display font-bold text-5xl md:text-7xl tracking-tight leading-normal py-2 block">
           younochkq
         </h1>
-        <p className="text-[#9090b0] text-sm font-bold tracking-[.3em] uppercase">юно · yuno</p>
+        <p className="text-[#9090b0] text-sm font-bold tracking-[.3em] uppercase mt-1">юно · yuno</p>
       </div>
+
 
       {/* Tags */}
       <div className="fade-up flex flex-wrap justify-center gap-2 mt-5" style={{ animationDelay: '.3s' }}>
