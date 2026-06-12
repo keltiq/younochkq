@@ -261,7 +261,7 @@ function Hero({ isLive }: { isLive: boolean }) {
       }`}>
         <span className={`w-2 h-2 rounded-full ${isLive ? 'bg-[#e84455] live-dot' : 'bg-gray-600'}`} />
         <span className={`text-xs font-bold tracking-widest uppercase ${isLive ? 'text-[#f4a0bc]' : 'text-[#9090b0]'}`}>
-          {isLive ? 'В ЭФИРЕ · LIVE' : 'VTuber · Streamer'}
+          {isLive ? 'СТРИМЕР В ЭФИРЕ' : 'VTuber · Streamer'}
         </span>
       </div>
 
@@ -373,7 +373,7 @@ function TwitchEmbed() {
         }}
       >
         <Twitch size={20} className={isOpen ? "" : "animate-pulse"} />
-        <span>{isOpen ? 'Закрыть трансляцию' : 'Смотреть прямой эфир8'}</span>
+        <span>{isOpen ? 'Закрыть трансляцию' : 'Смотреть прямой эфир'}</span>
       </button>
 
       {isOpen && (
@@ -633,7 +633,7 @@ export default function App() {
     const checkLiveStatus = async () => {
       try {
         // Используем DecAPI для проверки, так как он проще и надежнее для публичных запросов
-        const response = await fetch(`https://decapi.me/twitch/uptime/codemiko`);
+        const response = await fetch(`https://decapi.me/twitch/uptime/younochkq`);
         const text = await response.text();
         // Если стример онлайн, API вернет время стрима (например, "02:15:30"), 
         // если офлайн — строку "younochkq is offline"
