@@ -39,7 +39,7 @@ function IconFetta({ size = 20 }: { size?: number }) {
 function IconKick({ size = 20 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M10.84 12.75L6.09 7.75H2v8.5h4.09l4.75-5zM22 7.75h-4.09l-4.75 5 4.75 5H22v-8.5z" />
+      <path d="M1.333 0h8v5.333H12V2.667h2.667V0h8v8H20v2.667h-2.667v2.666H20V16h2.667v8h-8v-2.667H12v-2.666H9.333V24h-8Z" /> //M10.84 12.75L6.09 7.75H2v8.5h4.09l4.75-5zM22 7.75h-4.09l-4.75 5 4.75 5H22v-8.5z
     </svg>
   );
 }
