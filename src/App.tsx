@@ -446,10 +446,10 @@ const SOCIALS: ISocial[] = [
   { label: 'Twitch',    desc: 'Прямые трансляции', url: 'https://www.twitch.tv/younochkq',          icon: <Twitch size={22} />,        accent: '#9146ff' },
   { label: 'YouTube',   desc: 'Видео и клипы',     url: 'https://www.youtube.com/@Yunochkq',        icon: <Youtube size={22} />,       accent: '#ff0000' },
   { label: 'TikTok',    desc: 'Короткие видео',    url: 'https://www.tiktok.com/@younochkq77',      icon: <IconTikTok size={22} />,    accent: '#ff2d55' },
-  { label: 'Telegram',  desc: 'Новости и посты',   url: 'https://t.me/younochkaTW',                 icon: <Send size={22} />,          accent: '#229ed9' },
+  { label: 'Telegram',  desc: 'Новости и общение',   url: 'https://t.me/younochkaTW',                 icon: <Send size={22} />,          accent: '#229ed9' },
   { label: 'VK',        desc: 'ВКонтакте',         url: 'https://vk.com/younochkq',                 icon: <IconVK size={22} />,        accent: '#4a76a8' },
-  { label: 'VK Play',   desc: 'VK Видео',          url: 'https://live.vkvideo.ru/younochkq',        icon: <IconVKPlay size={22} />,    accent: '#07c160' },
-  { label: 'Fetta',     desc: 'Профиль',           url: 'https://fetta.app/u/Younochkq',            icon: <IconFetta size={22} />,     accent: '#e8739a' },
+  { label: 'VK Play',   desc: 'VK Live',          url: 'https://live.vkvideo.ru/younochkq',        icon: <IconVKPlay size={22} />,    accent: '#07c160' },
+  { label: 'Fetta',     desc: 'Подарки Юне',           url: 'https://fetta.app/u/Younochkq',            icon: <IconFetta size={22} />,     accent: '#e8739a' },
 ];
 
 function Socials() {
