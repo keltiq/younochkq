@@ -184,9 +184,9 @@ input[type='range']::-webkit-slider-thumb {
 /* Анимация падения */
 @keyframes fall-leaf {
   0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 1; }
-  25% { transform: translateY(25vh) translateX(120px) rotate(45deg); } /* Было 50px */
-  50% { transform: translateY(50vh) translateX(-120px) rotate(90deg); } /* Было -50px */
-  75% { transform: translateY(75vh) translateX(120px) rotate(135deg); } /* Было 50px */
+  25% { transform: translateY(25vh) translateX(130px) rotate(45deg); } /* Было 50px */
+  50% { transform: translateY(50vh) translateX(-150px) rotate(90deg); } /* Было -50px */
+  75% { transform: translateY(75vh) translateX(170px) rotate(135deg); } /* Было 50px */
   100% { transform: translateY(110vh) translateX(0) rotate(180deg); opacity: 0.5; }
 }
 
