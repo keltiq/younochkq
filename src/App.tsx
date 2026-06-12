@@ -457,7 +457,7 @@ function Socials() {
     <section id="socials" className="py-20 px-4">
       <div className="max-w-5xl mx-auto">
         <SectionTitle>Найти меня</SectionTitle>
-        <p className="text-center text-[#9090b0] text-sm mb-10 -mt-4">Подписывайся и пиши — не страшно ♡</p>
+        <p className="text-center text-[#9090b0] text-sm mb-10 -mt-4">Подписывайся и пиши — чтобы не потерять меня ♡</p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {SOCIALS.map((s, i) => (
