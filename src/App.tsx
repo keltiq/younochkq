@@ -654,7 +654,7 @@ export default function App() {
           src="/easter.png" 
           alt="leaf"
           className="leaf-falling w-48 h-48 rounded-full" 
-          style={{ left: `${Math.random() * 80 + 10}%` }} 
+          style={{ left: `${Math.random() * 40 + 30}%` }} // 80 и 10
         />
       )}
 
