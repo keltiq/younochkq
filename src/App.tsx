@@ -635,35 +635,58 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
   );
 }
 
+
 // ─── App ──────────────────────────────────────────────────────────────────────
 
 export default function App() {
   const [isLive, setIsLive] = useState(false);
-  // Добавляем состояние для пасхалки
   const [showLeaf, setShowLeaf] = useState(false);
 
-  // Функция активации (срабатывает только 1 раз)
   const triggerLeaf = () => {
     if (showLeaf) return;
     setShowLeaf(true);
-    setTimeout(() => setShowLeaf(false), 10000); // 4 секунды — время анимации
+    setTimeout(() => setShowLeaf(false), 10000); // 10 секунд
   };
 
   useEffect(() => {
-    // ... ваш текущий useEffect для live статуса ...
+    // Функция проверки статуса через публичное API
+    const checkStreamStatus = async () => {
+      try {
+        const response = await fetch('https://decapi.me/twitch/uptime/younochkq');
+        const text = await response.text();
+        
+        // Decapi возвращает строку "{channel} is offline", если стрима нет.
+        // Если стрим идет, он вернет время (например, "1 hour, 20 minutes")
+        if (text.includes('offline')) {
+          setIsLive(false);
+        } else {
+          setIsLive(true);
+        }
+      } catch (error) {
+        console.error('Ошибка при проверке статуса Twitch:', error);
+      }
+    };
+
+    // 1. Проверяем статус сразу при загрузке страницы
+    checkStreamStatus();
+
+    // 2. Устанавливаем интервал на проверку каждые 2 минуты (120 000 мс)
+    const interval = setInterval(checkStreamStatus, 120000);
+
+    // 3. Очищаем интервал при размонтировании компонента (good practice)
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="min-h-screen bg-[#070710] text-[#f0f0ff] relative">
       <StarField />
       
-      {/* Отрисовка "падающего листа" */}
       {showLeaf && (
         <img 
           src="/easter.png" 
           alt="leaf"
-          className="leaf-falling w-48 h-48 rounded-full" 
-          style={{ left: `${Math.random() * 40 + 30}%` }} // 80 и 10
+          className="leaf-falling w-48 h-48 rounded-full absolute z-[9999] pointer-events-none" 
+          style={{ left: `${Math.random() * 40 + 30}%` }} 
         />
       )}
 
@@ -673,7 +696,6 @@ export default function App() {
         <TwitchEmbed />
         <Socials />
         <Donate />
-        {/* Передаем функцию в Footer */}
         <Footer onImageClick={triggerLeaf} />
       </main>
       <MusicPlayer />
