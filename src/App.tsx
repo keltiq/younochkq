@@ -645,6 +645,16 @@ export default function App() {
   const triggerLeaf = () => {
     if (showLeaf) return;
     setShowLeaf(true);
+    // Создаем и запускаем аудио
+    // Убедись, что файл easter.mp3 лежит в папке public (там же, где easter.png)
+    const easterAudio = new Audio('/ah.mp3'); 
+    easterAudio.volume = 0.6; // Настройка громкости (от 0.0 до 1.0)
+    
+    easterAudio.play().catch(err => {
+      console.warn("Браузер заблокировал воспроизведение звука:", err);
+    });
+
+    // Прячем лист через 10 секунд (длительность можно подогнать под длину mp3)
     setTimeout(() => setShowLeaf(false), 10000); // 10 секунд
   };
 
