@@ -36,6 +36,14 @@ function IconFetta({ size = 20 }: { size?: number }) {
   );
 }
 
+function IconKick({ size = 20 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M10.84 12.75L6.09 7.75H2v8.5h4.09l4.75-5zM22 7.75h-4.09l-4.75 5 4.75 5H22v-8.5z" />
+    </svg>
+  );
+}
+
 function IconDonation({ size = 20 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -450,6 +458,7 @@ const SOCIALS: ISocial[] = [
   { label: 'VK',        desc: 'ВКонтакте',         url: 'https://vk.com/younochkq',                 icon: <IconVK size={22} />,        accent: '#4a76a8' },
   { label: 'VK Play',   desc: 'VK Live',          url: 'https://live.vkvideo.ru/younochkq',        icon: <IconVKPlay size={22} />,    accent: '#07c160' },
   { label: 'Fetta',     desc: 'Подарки Юне',           url: 'https://fetta.app/u/Younochkq',            icon: <IconFetta size={22} />,     accent: '#e8739a' },
+  { label: 'Kick',     desc: 'Стримы на Kick',     url: 'https://kick.com/younochkq',     icon: <IconKick size={22} />,     accent: '#53fc18'  },
 ];
 
 function Socials() {
