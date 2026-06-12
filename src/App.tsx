@@ -637,7 +637,7 @@ export default function App() {
   const triggerLeaf = () => {
     if (showLeaf) return;
     setShowLeaf(true);
-    setTimeout(() => setShowLeaf(false), 4000); // 4 секунды — время анимации
+    setTimeout(() => setShowLeaf(false), 15000); // 4 секунды — время анимации
   };
 
   useEffect(() => {
