@@ -586,14 +586,16 @@ function Donate() {
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
 
-function Footer() {
+function Footer({ onImageClick }: { onImageClick: () => void }) {
   return (
     <footer className="py-10 px-4 border-t border-[#252538]/50">
       <div className="max-w-5xl mx-auto flex flex-col items-center gap-4">
-        <div className="flex items-center gap-2">
+        {/* Добавляем onClick на блок с картинкой */}
+        <div className="flex items-center gap-2 cursor-pointer" onClick={onImageClick}>
           <img src="/image.png" alt="younochkq" className="w-8 h-8 rounded-full border border-[#e8739a]/30 object-cover object-top" />
           <span className="font-display font-bold gt-gold-pink text-lg">younochkq</span>
         </div>
+        
         <p className="text-[#9090b0] text-xs">
           Сделано с <span className="text-[#e8739a]">♡</span> для Юно
         </p>
@@ -628,41 +630,45 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   const [isLive, setIsLive] = useState(false);
+  // Добавляем состояние для пасхалки
+  const [showLeaf, setShowLeaf] = useState(false);
+
+  // Функция активации (срабатывает только 1 раз)
+  const triggerLeaf = () => {
+    if (showLeaf) return;
+    setShowLeaf(true);
+    setTimeout(() => setShowLeaf(false), 4000); // 4 секунды — время анимации
+  };
 
   useEffect(() => {
-    const checkLiveStatus = async () => {
-      try {
-        // Используем DecAPI для проверки, так как он проще и надежнее для публичных запросов
-        const response = await fetch(`https://decapi.me/twitch/uptime/younochkq`);
-        const text = await response.text();
-        // Если стример онлайн, API вернет время стрима (например, "02:15:30"), 
-        // если офлайн — строку "younochkq is offline"
-        setIsLive(!text.includes('offline'));
-      } catch (err) {
-        console.error("Не удалось проверить статус:", err);
-      }
-    };
-
-    checkLiveStatus();
-    const interval = setInterval(checkLiveStatus, 180000);
-    return () => clearInterval(interval);
+    // ... ваш текущий useEffect для live статуса ...
   }, []);
 
   return (
     <div className="min-h-screen bg-[#070710] text-[#f0f0ff] relative">
       <StarField />
+      
+      {/* Отрисовка "падающего листа" */}
+      {showLeaf && (
+        <img 
+          src="/easter.png" 
+          alt="leaf"
+          className="leaf-falling w-16 h-16 rounded-full" 
+          style={{ left: `${Math.random() * 80 + 10}%` }} 
+        />
+      )}
+
       <main className="relative z-10">
-        {/* Передаем статус в Hero */}
         <Hero isLive={isLive} />
         <About />
         <TwitchEmbed />
         <Socials />
         <Donate />
-        <Footer />
+        {/* Передаем функцию в Footer */}
+        <Footer onImageClick={triggerLeaf} />
       </main>
       <MusicPlayer />
       <ScrollTop />
     </div>
   );
 }
-
