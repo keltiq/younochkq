@@ -670,7 +670,7 @@ export default function App() {
     // Функция проверки статуса через публичное API
     const checkStreamStatus = async () => {
       try {
-        const response = await fetch('https://decapi.me/twitch/uptime/younochkq');
+        const response = await fetch('https://decapi.me/twitch/uptime/dimanjapan'); // younochkq
         const text = await response.text();
         
         // Decapi возвращает строку "{channel} is offline", если стрима нет.
