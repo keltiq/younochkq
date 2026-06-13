@@ -321,24 +321,22 @@ function Hero({ isLive }: { isLive: boolean }) {
 }
 // ─── Stream ────────────────────────────────────────────────────────────────────
 
-function TwitchEmbed() {
+// ─── Stream ────────────────────────────────────────────────────────────────────
+
+function TwitchEmbed({ isLive }: { isLive: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const playerRef = useRef<HTMLDivElement>(null);
   const embedInstance = useRef<any>(null);
 
   useEffect(() => {
-    // Если компонент размонтирован или закрыт, очищаем инстанс
     return () => {
       embedInstance.current = null;
     };
   }, []);
 
   const initTwitch = () => {
-    // Проверка, что контейнер готов и API доступно
     if (playerRef.current && window.Twitch) {
-      // Очистка перед созданием нового инстанса
       playerRef.current.innerHTML = '';
-      
       embedInstance.current = new window.Twitch.Embed(playerRef.current, {
         width: '100%',
         height: '100%',
@@ -351,24 +349,34 @@ function TwitchEmbed() {
     }
   };
 
+  const openPlayer = () => {
+    setIsOpen(true);
+    if (window.Twitch) {
+      setTimeout(initTwitch, 0);
+    } else {
+      const script = document.createElement('script');
+      script.src = 'https://player.twitch.tv/js/embed/v1.js';
+      script.async = true;
+      script.onload = initTwitch;
+      document.body.appendChild(script);
+    }
+  };
+
   const handleToggle = () => {
     if (isOpen) {
       setIsOpen(false);
     } else {
-      setIsOpen(true);
-      // Если скрипт уже загружен, инициализируем сразу
-      if (window.Twitch) {
-        setTimeout(initTwitch, 0);
-      } else {
-        // Если скрипт еще не загружен — загружаем его
-        const script = document.createElement('script');
-        script.src = 'https://player.twitch.tv/js/embed/v1.js';
-        script.async = true;
-        script.onload = initTwitch;
-        document.body.appendChild(script);
-      }
+      openPlayer();
     }
   };
+
+  // Автоматически открываем плеер, если статус isLive становится true
+  useEffect(() => {
+    if (isLive && !isOpen) {
+      openPlayer();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLive]);
 
   return (
     <section className="py-10 px-4 max-w-4xl mx-auto text-center relative z-10">
@@ -381,7 +389,7 @@ function TwitchEmbed() {
         }}
       >
         <Twitch size={20} className={isOpen ? "" : "animate-pulse"} />
-        <span>{isOpen ? 'Закрыть трансляцию' : 'Смотреть прямой эфир'}</span>
+        <span>{isOpen ? 'Скрыть трансляцию' : 'Смотреть прямой эфир'}</span>
       </button>
 
       {isOpen && (
@@ -703,7 +711,8 @@ export default function App() {
       <main className="relative z-10">
         <Hero isLive={isLive} />
         <About />
-        <TwitchEmbed />
+        {/* Передаем статус трансляции в плеер */}
+        <TwitchEmbed isLive={isLive} />
         <Socials />
         <Donate />
         <Footer onImageClick={triggerLeaf} />
