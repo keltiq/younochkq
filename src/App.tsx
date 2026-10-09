@@ -277,7 +277,7 @@ function Hero({ isLive }: { isLive: boolean }) {
       <div className="fade-up mb-8 relative" style={{ animationDelay: '.1s' }}>
         <div className="avatar-ring w-48 h-48 md:w-56 md:h-56">
           <div className="relative z-10 w-full h-full rounded-full overflow-hidden border-[5px] border-[#070710]">
-            <img src="/image.png" alt="younochkq" className="w-full h-full object-cover object-top" />
+            <img src={`${import.meta.env.BASE_URL}image.png`} alt="younochkq" className="w-full h-full object-cover object-top" />
           </div>
         </div>
         <span className="absolute -top-1 -right-1 text-[#f9d56e] text-lg float-anim">✦</span>
@@ -609,7 +609,7 @@ function Footer({ onImageClick }: { onImageClick: () => void }) {
       <div className="max-w-5xl mx-auto flex flex-col items-center gap-4">
         {/* Добавляем onClick на блок с картинкой */}
         <div className="flex items-center gap-2 cursor-pointer" onClick={onImageClick}>
-          <img src="/image.png" alt="younochkq" className="w-8 h-8 rounded-full border border-[#e8739a]/30 object-cover object-top" />
+          <img src={`${import.meta.env.BASE_URL}image.png`} alt="younochkq" className="w-8 h-8 rounded-full border border-[#e8739a]/30 object-cover object-top" />
           <span className="font-display font-bold gt-gold-pink text-lg">younochkq</span>
         </div>
         
@@ -655,7 +655,7 @@ export default function App() {
     setShowLeaf(true);
     // Создаем и запускаем аудио
     // Убедись, что файл easter.mp3 лежит в папке public (там же, где easter.png)
-    const easterAudio = new Audio('/ah.mp3'); 
+    const easterAudio = new Audio(`${import.meta.env.BASE_URL}ah.mp3`); 
     easterAudio.volume = 0.6; // Настройка громкости (от 0.0 до 1.0)
     
     easterAudio.play().catch(err => {
@@ -701,7 +701,7 @@ export default function App() {
       
       {showLeaf && (
         <img 
-          src="/easter.png" 
+          src={`${import.meta.env.BASE_URL}easter.png`} 
           alt="leaf"
           className="leaf-falling w-48 h-48 rounded-full absolute z-[9999] pointer-events-none" 
           style={{ left: `${Math.random() * 40 + 30}%` }} 
